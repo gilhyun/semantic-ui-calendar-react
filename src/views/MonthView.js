@@ -38,7 +38,9 @@ function MonthView(props) {
         width={MONTH_CALENDAR_ROW_WIDTH}
         data={months}
         onCellClick={onMonthClick}
+        onCellHover={props.onCellHover}
         active={active}
+        hovered={props.hovered}
         disabled={disabled} />
     </Calendar>
   );
