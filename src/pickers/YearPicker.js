@@ -7,7 +7,9 @@ import YearView from '../views/YearView';
 import { getUnhandledProps } from '../lib';
 import BasePicker from './BasePicker';
 
-const YEARS_ON_PAGE = 3 * 4;
+const PAGE_WITH = 3;
+const PAGE_HEIGHT = 4;
+const YEARS_ON_PAGE = PAGE_WITH * PAGE_HEIGHT;
 
 class YearPicker extends BasePicker {
   /*
@@ -54,6 +56,39 @@ class YearPicker extends BasePicker {
         return yearIndex;
       }
     }
+  }
+
+  getFirstActiveCellOnPage = () => {
+    const activeOnly = _.filter(
+      _.range(0, YEARS_ON_PAGE),
+      y => !_.includes(this.getDisabledYearsPositions(), y),
+    );
+    return activeOnly[0];
+  }
+
+  getLastActiveCellOnPage = () => {
+    const activeOnly = _.filter(
+      _.range(0, YEARS_ON_PAGE),
+      y => !_.includes(this.getDisabledYearsPositions(), y),
+    );
+    return activeOnly[activeOnly.length - 1];
+  }
+
+  // core
+  shouldSwitchPage = () => {
+    // case <- or ->
+    //   next < start => -1
+    //   next > start => 1
+    //   0
+    // case up or down
+    //   next - width < start => -1
+    //   next + width > end => 1
+    //   0
+  }
+
+  // core
+  getNextHoveredCellPosition = (key, curPos, width) => {
+    // skips disabled cells
   }
 
   getDisabledYearsPositions() {
