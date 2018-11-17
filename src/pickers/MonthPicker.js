@@ -161,7 +161,7 @@ class MonthPicker extends BasePicker {
         hasNextPage={this.isNextPageAvailable()}
         disabled={this.getDisabledMonthsPositions()}
         active={this.getActiveCellPosition()}
-        hovered={this.state.hoveredSellPosition}
+        hovered={this.state.hoveredCellPosition}
         currentYear={this.getCurrentYear()} />
     );
   }

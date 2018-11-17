@@ -4,13 +4,15 @@ class BasePicker extends React.Component {
 
   componentDidMount() {
     this.setState({
-      hoveredSellPosition: this.getActiveCellPosition() || this.getInitialDatePosition()
+      hoveredCellPosition: (this.getActiveCellPosition
+        && this.getActiveCellPosition())
+        || this.getInitialDatePosition()
     });
   }
 
   onHoveredCellPositionChange = (e, { itemPosition }) => {
     this.setState({
-      hoveredSellPosition: itemPosition,
+      hoveredCellPosition: itemPosition,
     });
   }
 }
