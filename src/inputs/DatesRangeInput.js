@@ -99,6 +99,7 @@ class DatesRangeInput extends BaseInput {
         render={(pickerProps) =>
           (<DatesRangePicker
             {...pickerProps}
+            closePopup={this.closePopup}
             onChange={this.handleSelect}
             dateFormat={dateFormat}
             initializeWith={getInitializer({ initialDate, dateFormat })}

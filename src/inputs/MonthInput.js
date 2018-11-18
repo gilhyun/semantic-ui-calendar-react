@@ -54,6 +54,7 @@ class MonthInput extends BaseInput {
         render={(pickerProps) => (
           <MonthPicker
             {...pickerProps}
+            closePopup={this.closePopup}
             hasHeader={false}
             onChange={this.handleSelect}
             initializeWith={getInitializer({ initialDate, dateFormat })}

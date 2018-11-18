@@ -174,6 +174,7 @@ class YearPicker extends BasePicker {
         onNextPageBtnClick={this.switchToNextPage}
         onPrevPageBtnClick={this.switchToPrevPage}
         onYearClick={this.handleChange}
+        onBlur={this.handleBlur}
         ref={e => this.calendarNode = ReactDOM.findDOMNode(e)}
         hovered={this.state.hoveredCellPosition}
         onCellHover={this.onHoveredCellPositionChange}

@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
@@ -61,6 +60,7 @@ class YearInput extends BaseInput {
           (pickerProps) => (
             <YearPicker
               {...pickerProps}
+              closePopup={this.closePopup}
               onChange={this.handleSelect}
               initializeWith={initializeWith}
               value={parseValue(value, dateFormat)}

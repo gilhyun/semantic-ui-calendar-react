@@ -276,6 +276,7 @@ class DatesRangePicker extends BasePicker {
         onDayClick={this.handleChange}
         hasPrevPage={this.isPrevPageAvailable()}
         hasNextPage={this.isNextPageAvailable()}
+        onBlur={this.handleBlur}
         ref={e => this.calendarNode = ReactDOM.findDOMNode(e)}
         currentDate={this.getCurrentDate()}
         selectedRange={this.getSelectedRange()}

@@ -154,6 +154,7 @@ class HourPicker extends BasePicker {
         hasPrevPage={this.isPrevPageAvailable()}
         hasNextPage={this.isNextPageAvailable()}
         onHourClick={this.handleChange}
+        onBlur={this.handleBlur}
         ref={e => this.calendarNode = ReactDOM.findDOMNode(e)}
         hovered={this.state.hoveredCellPosition}
         onCellHover={this.onHoveredCellPositionChange}
