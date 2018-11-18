@@ -207,6 +207,8 @@ YearPicker.propTypes = {
   maxDate: PropTypes.instanceOf(moment),
   /** Force popup to close. */
   closePopup: PropTypes.func,
+  isPickerInFocus: PropTypes.func,
+  onViewMount: PropTypes.func,
 };
 
 export default YearPicker;

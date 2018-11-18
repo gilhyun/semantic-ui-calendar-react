@@ -26,6 +26,7 @@ class DayView extends BaseView {
       hovered,
       onCellHover,
       hasHeader,
+      onMount,
       ...rest
     } = this.props;
     return (
@@ -77,6 +78,7 @@ DayView.propTypes = {
   disabled: PropTypes.arrayOf(PropTypes.number),
   /** Position of a day to display as active. */
   active: PropTypes.number,
+  onMount: PropTypes.func,
 };
 
 export default DayView;

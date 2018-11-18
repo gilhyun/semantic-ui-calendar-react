@@ -25,6 +25,7 @@ class HourView extends BaseView {
       currentDate,
       hovered,
       onCellHover,
+      onMount,
       ...rest
     } = this.props;
     const headerProps = {
@@ -80,6 +81,7 @@ HourView.propTypes = {
   active: PropTypes.number,
   /** Date that is displayed in calendar header. */
   currentDate: PropTypes.string,
+  onMount: PropTypes.func,
 };
 
 export default HourView;

@@ -82,7 +82,6 @@ class DateInput extends BaseInput {
       isPickerInFocus: this.isPickerInFocus,
       onViewMount: this.onViewMount,
       closePopup: this.closePopup,
-      popupIsClosed: this.state.popupIsClosed,
       tabIndex,
       hasHeader: true,
       onChange: this.handleSelect,

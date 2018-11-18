@@ -24,6 +24,7 @@ class MinuteView extends BaseView {
       currentDate,
       hovered,
       onCellHover,
+      onMount,
       ...rest
     } = this.props;
     const headerProps = {
@@ -76,6 +77,7 @@ MinuteView.propTypes = {
   active: PropTypes.number,
   /** A date that is displayed in calendar header. */
   currentDate: PropTypes.string,
+  onMount: PropTypes.func,
 };
 
 export default MinuteView;

@@ -24,6 +24,7 @@ class YearView extends BaseView {
       active,
       hovered,
       onCellHover,
+      onMount,
       ...rest
     } = this.props;
     const headerTitle = `${_.first(years)} - ${_.last(years)}`;
@@ -74,6 +75,7 @@ YearView.propTypes = {
   disabled: PropTypes.arrayOf(PropTypes.number),
   /** Index of a year in `years` array that should be displayed as active. */
   active: PropTypes.number,
+  onMount: PropTypes.func,
 };
 
 export default YearView;

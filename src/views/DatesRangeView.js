@@ -40,6 +40,7 @@ class DatesRangeView extends BaseView {
       selectedRange,
       hovered,
       onCellHover,
+      onMount,
       ...rest
     } = this.props;
     const {
@@ -103,6 +104,7 @@ DatesRangeView.propTypes = {
   onHeaderClick: PropTypes.func,
   /** An array of day positions to display as disabled. */
   disabled: PropTypes.arrayOf(PropTypes.number),
+  onMount: PropTypes.func,
 };
 
 DatesRangeView.defaultProps = {

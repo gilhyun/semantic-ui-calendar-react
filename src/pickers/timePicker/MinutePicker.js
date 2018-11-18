@@ -137,6 +137,10 @@ MinutePicker.propTypes = {
   timeFormat: PropTypes.oneOf([
     'ampm', 'AMPM', '24',
   ]),
+  isPickerInFocus: PropTypes.func,
+  onViewMount: PropTypes.func,
+  /** Force popup to close. */
+  closePopup: PropTypes.func,
 };
 
 MinutePicker.defaultProps = {

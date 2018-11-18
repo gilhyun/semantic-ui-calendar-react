@@ -25,6 +25,7 @@ class MonthView extends BaseView {
       currentYear,
       onCellHover,
       hovered,
+      onMount,
       ...rest
     } = this.props;
     const headerProps = {
@@ -80,6 +81,7 @@ MonthView.propTypes = {
   active: PropTypes.number,
   /** A year to display in header. */
   currentYear: PropTypes.string,
+  onMount: PropTypes.func,
 };
 
 export default MonthView;

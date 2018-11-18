@@ -300,6 +300,10 @@ DatesRangePicker.propTypes = {
   minDate: PropTypes.instanceOf(moment),
   /** Maximal date that could be selected. */
   maxDate: PropTypes.instanceOf(moment),
+  isPickerInFocus: PropTypes.func,
+  onViewMount: PropTypes.func,
+  /** Force popup to close. */
+  closePopup: PropTypes.func,
 };
 
 export default DatesRangePicker;
