@@ -79,6 +79,7 @@ class DateInput extends BaseInput {
       enable,
     } = this.props;
     const pickerProps = {
+      isPickerInFocus: this.isPickerInFocus,
       onViewMount: this.onViewMount,
       closePopup: this.closePopup,
       popupIsClosed: this.state.popupIsClosed,

@@ -100,6 +100,7 @@ class DateTimeInput extends BaseInput {
     const dateTimeFormat = this.getDateTimeFormat();
     const pickerProps = {
       tabIndex,
+      isPickerInFocus: this.isPickerInFocus,
       onViewMount: this.onViewMount,
       closePopup: this.closePopup,
       displayWeeks: true,

@@ -75,6 +75,7 @@ class TimeInput extends BaseInput {
     const currentValue = parseValue(value, TIME_FORMAT[timeFormat]);
     const pickerProps = {
       onViewMount: this.onViewMount,
+      isPickerInFocus: this.isPickerInFocus,
       hasHeader: false,
       closePopup: this.closePopup,
       initializeWith: getInitializer({ initialDate: currentValue, dateFormat: TIME_FORMAT[timeFormat] }),

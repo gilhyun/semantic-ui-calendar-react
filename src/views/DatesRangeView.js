@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
@@ -9,6 +10,7 @@ import {
   WEEKS_TO_DISPLAY,
   DAY_CALENDAR_ROW_WIDTH,
 } from './DayView';
+import BaseView from './BaseView';
 
 const DAY_POSITIONS = _.range(WEEKS_TO_DISPLAY * 7);
 
@@ -22,7 +24,7 @@ function getActive(start, end) {
   }
 }
 
-class DatesRangeView extends React.Component {
+class DatesRangeView extends BaseView {
   render() {
     const {
       days,
@@ -45,7 +47,7 @@ class DatesRangeView extends React.Component {
       end,
     } = active;
     return (
-      <Calendar {...rest}>
+      <Calendar ref={e => this.calendarNode = ReactDOM.findDOMNode(e)} {...rest}>
         <Header
           width={DAY_CALENDAR_ROW_WIDTH}
           displayWeeks

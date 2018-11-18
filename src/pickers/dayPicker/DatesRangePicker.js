@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
@@ -277,7 +276,7 @@ class DatesRangePicker extends BasePicker {
         hasPrevPage={this.isPrevPageAvailable()}
         hasNextPage={this.isNextPageAvailable()}
         onBlur={this.handleBlur}
-        ref={e => this.calendarNode = ReactDOM.findDOMNode(e)}
+        onMount={this.props.onViewMount}
         currentDate={this.getCurrentDate()}
         selectedRange={this.getSelectedRange()}
         active={this.getActiveCellsPositions()}

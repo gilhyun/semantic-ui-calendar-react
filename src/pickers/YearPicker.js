@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
@@ -175,7 +174,7 @@ class YearPicker extends BasePicker {
         onPrevPageBtnClick={this.switchToPrevPage}
         onYearClick={this.handleChange}
         onBlur={this.handleBlur}
-        ref={e => this.calendarNode = ReactDOM.findDOMNode(e)}
+        onMount={this.props.onViewMount}
         hovered={this.state.hoveredCellPosition}
         onCellHover={this.onHoveredCellPositionChange}
         hasPrevPage={this.isPrevPageAvailable()}

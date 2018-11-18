@@ -60,6 +60,8 @@ class YearInput extends BaseInput {
           (pickerProps) => (
             <YearPicker
               {...pickerProps}
+              isPickerInFocus={this.isPickerInFocus}
+              onViewMount={this.onViewMount}
               closePopup={this.closePopup}
               onChange={this.handleSelect}
               initializeWith={initializeWith}

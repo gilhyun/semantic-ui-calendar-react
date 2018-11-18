@@ -23,13 +23,8 @@ class BasePicker extends React.Component {
     });
   }
 
-  isPickerInFocus = () => {
-    return this.calendarNode === document.activeElement
-      || (this.calendarNode && this.calendarNode.contains(document.activeElement));
-  }
-
   handleKeyPress = (event) => {
-    if (!this.isPickerInFocus()) {
+    if (!this.props.isPickerInFocus()) {
       return;
     }
     const key = keyboardKey.getKey(event);
@@ -44,7 +39,7 @@ class BasePicker extends React.Component {
 
   handleEnterKeyPress = (event) => {
     const key = keyboardKey.getKey(event);
-    if (key === 'Enter' && this.isPickerInFocus()) {
+    if (key === 'Enter' && this.props.isPickerInFocus()) {
       event.preventDefault();
       const selectedValue = this.buildCalendarValues()[this.state.hoveredCellPosition];
       this.handleChange(null, {
@@ -59,7 +54,7 @@ class BasePicker extends React.Component {
   }
 
   handleArrowKeyPress = (event) => {
-    if (!this.isPickerInFocus()) {
+    if (!this.props.isPickerInFocus()) {
       return;
     }
     const key = keyboardKey.getKey(event);

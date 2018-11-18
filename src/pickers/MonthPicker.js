@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
@@ -171,7 +170,6 @@ class MonthPicker extends BasePicker {
         hasNextPage={this.isNextPageAvailable()}
         onBlur={this.handleBlur}
         onMount={this.props.onViewMount}
-        ref={e => this.calendarNode = ReactDOM.findDOMNode(e)}
         disabled={this.getDisabledMonthsPositions()}
         active={this.getActiveCellPosition()}
         hovered={this.state.hoveredCellPosition}

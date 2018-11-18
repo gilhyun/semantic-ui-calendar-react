@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
@@ -156,7 +155,6 @@ class HourPicker extends BasePicker {
         onHourClick={this.handleChange}
         onBlur={this.handleBlur}
         onMount={this.props.onViewMount}
-        ref={e => this.calendarNode = ReactDOM.findDOMNode(e)}
         hovered={this.state.hoveredCellPosition}
         onCellHover={this.onHoveredCellPositionChange}
         disabled={this.getDisabledHoursPositions()}
