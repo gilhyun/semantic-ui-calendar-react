@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
-import keyboardKey from 'keyboard-key';
 
 import YearView from '../views/YearView';
 import { getUnhandledProps } from '../lib';
@@ -28,7 +27,7 @@ class YearPicker extends BasePicker {
     this.PAGE_WIDTH = PAGE_WIDTH;
   }
 
-  buildYears() {
+  buildCalendarValues() {
     /*
       Return array of years (strings) like ['2012', '2013', ...]
       that used to populate calendar's page.
@@ -44,16 +43,16 @@ class YearPicker extends BasePicker {
   }
 
   getInitialDatePosition = () => {
-    return this.buildYears().indexOf(this.state.date.year().toString());
+    return this.buildCalendarValues().indexOf(this.state.date.year().toString());
   }
 
   getActiveCellPosition() {
     /*
       Return position of a year that should be displayed as active
-      (position in array returned by `this.buildYears`).
+      (position in array returned by `this.buildCalendarValues`).
     */
     if (!_.isNil(this.props.value)) {
-      const years = this.buildYears();
+      const years = this.buildCalendarValues();
       const yearIndex = years.indexOf(this.props.value.year().toString());
       if (yearIndex >= 0) {
         return yearIndex;
@@ -71,10 +70,10 @@ class YearPicker extends BasePicker {
   getDisabledYearsPositions() {
     /*
       Return position numbers of years that should be displayed as disabled
-      (position in array returned by `this.buildYears`).
+      (position in array returned by `this.buildCalendarValues`).
     */
     let disabled = [];
-    const years = this.buildYears();
+    const years = this.buildCalendarValues();
     if (_.isArray(this.props.enable)) {
       const enabledYears = this.props.enable.map(yearMoment => yearMoment.year().toString());
       disabled = _.concat(
@@ -122,7 +121,7 @@ class YearPicker extends BasePicker {
       maxDate,
       enable,
     } = this.props;
-    const lastOnPage = parseInt(_.last(this.buildYears()));
+    const lastOnPage = parseInt(_.last(this.buildCalendarValues()));
 
     if (_.isArray(enable)) {
       return _.some(enable, enabledYear => enabledYear.year() > lastOnPage);
@@ -136,7 +135,7 @@ class YearPicker extends BasePicker {
       minDate,
       enable,
     } = this.props;
-    const firstOnPage = parseInt(_.first(this.buildYears()));
+    const firstOnPage = parseInt(_.first(this.buildCalendarValues()));
 
     if (_.isArray(enable)) {
       return _.some(enable, enabledYear => enabledYear.year() < firstOnPage);
@@ -166,21 +165,12 @@ class YearPicker extends BasePicker {
     }, callback);
   }
 
-  handleEnterKeyPress = (event) => {
-    const key = keyboardKey.getKey(event);
-    if (key === 'Enter' && this.isPickerInFocus()) {
-      event.preventDefault();
-      const selectedValue = this.buildYears()[this.state.hoveredCellPosition];
-      this.handleChange(null, { value: selectedValue });
-    }
-  }
-
   render() {
     const rest = getUnhandledProps(YearPicker, this.props);
     return (
       <YearView
         { ...rest }
-        years={this.buildYears()}
+        years={this.buildCalendarValues()}
         onNextPageBtnClick={this.switchToNextPage}
         onPrevPageBtnClick={this.switchToPrevPage}
         onYearClick={this.handleChange}
@@ -200,6 +190,7 @@ YearPicker.propTypes = {
   onChange: PropTypes.func.isRequired,
   /** A value for initializing year picker's state. */
   initializeWith: PropTypes.instanceOf(moment).isRequired,
+  hasHeader: PropTypes.bool,
   /** Currently selected year. */
   value: PropTypes.instanceOf(moment),
   /** Array of disabled years. */

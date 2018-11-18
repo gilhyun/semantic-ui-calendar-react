@@ -8,42 +8,46 @@ import Body from './CalendarBody/Body';
 export const DAY_CALENDAR_ROW_WIDTH = '7';
 export const WEEKS_TO_DISPLAY = 6;
 
-function DayView(props) {
-  const {
-    days,
-    onNextPageBtnClick,
-    onPrevPageBtnClick,
-    onDayClick,
-    hasNextPage,
-    hasPrevPage,
-    currentDate,
-    onHeaderClick,
-    disabled,
-    active,
-    hovered,
-    onCellHover,
-  } = props;
-  return (
-    <Calendar>
-      <Header
-        width={DAY_CALENDAR_ROW_WIDTH}
-        displayWeeks={true}
-        onNextPageBtnClick={onNextPageBtnClick}
-        onPrevPageBtnClick={onPrevPageBtnClick}
-        hasNextPage={hasNextPage}
-        hasPrevPage={hasPrevPage}
-        title={currentDate}
-        onHeaderClick={onHeaderClick} />
-      <Body
-        width={DAY_CALENDAR_ROW_WIDTH}
-        data={days}
-        hovered={hovered}
-        onCellHover={onCellHover}
-        onCellClick={onDayClick}
-        active={active}
-        disabled={disabled} />
-    </Calendar>
-  );
+class DayView extends React.Component {
+  render() {
+    const {
+      days,
+      onNextPageBtnClick,
+      onPrevPageBtnClick,
+      onDayClick,
+      hasNextPage,
+      hasPrevPage,
+      currentDate,
+      onHeaderClick,
+      disabled,
+      active,
+      hovered,
+      onCellHover,
+      hasHeader,
+      ...rest
+    } = this.props;
+    return (
+      <Calendar {...rest}>
+        <Header
+          width={DAY_CALENDAR_ROW_WIDTH}
+          displayWeeks={true}
+          onNextPageBtnClick={onNextPageBtnClick}
+          onPrevPageBtnClick={onPrevPageBtnClick}
+          hasNextPage={hasNextPage}
+          hasPrevPage={hasPrevPage}
+          title={currentDate}
+          onHeaderClick={onHeaderClick} />
+        <Body
+          width={DAY_CALENDAR_ROW_WIDTH}
+          data={days}
+          hovered={hovered}
+          onCellHover={onCellHover}
+          onCellClick={onDayClick}
+          active={active}
+          disabled={disabled} />
+      </Calendar>
+    );
+  }
 }
 
 DayView.propTypes = {

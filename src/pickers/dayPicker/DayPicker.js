@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
@@ -14,7 +15,8 @@ import {
 } from './sharedFunctions';
 import BasePicker from '../BasePicker';
 
-export const DAYS_ON_PAGE = WEEKS_TO_DISPLAY * 7;
+const PAGE_WIDTH = 7;
+export const DAYS_ON_PAGE = WEEKS_TO_DISPLAY * PAGE_WIDTH;
 
 class DayPicker extends BasePicker {
   constructor(props) {
@@ -23,9 +25,10 @@ class DayPicker extends BasePicker {
       /* moment instance */
       date: props.initializeWith.clone(),
     };
+    this.PAGE_WIDTH = PAGE_WIDTH;
   }
 
-  buildDays() {
+  buildCalendarValues() {
     /*
       Return array of dates (strings) like ['31', '1', ...]
       that used to populate calendar's page.
@@ -33,18 +36,25 @@ class DayPicker extends BasePicker {
     return buildDays(this.state.date, DAYS_ON_PAGE);
   }
 
+  getSelectableCellPositions = () => {
+    return _.filter(
+      _.range(0, DAYS_ON_PAGE),
+      d => !_.includes(this.getDisabledDaysPositions(), d),
+    );
+  }
+
   getInitialDatePosition = () => {
-    return this.buildDays().indexOf(this.state.date.date().toString());
+    return this.buildCalendarValues().indexOf(this.state.date.date().toString());
   }
 
   getActiveCellPosition() {
     /*
       Return position of a date that should be displayed as active
-      (position in array returned by `this.buildDays`).
+      (position in array returned by `this.buildCalendarValues`).
     */
     if (this.props.value && this.props.value.isSame(this.state.date, 'month')) {
       const disabledPositions = this.getDisabledDaysPositions();
-      const active = this.buildDays()
+      const active = this.buildCalendarValues()
         .map((day, i) => _.includes(disabledPositions, i)? undefined : day)
         .indexOf(this.props.value.date().toString());
       if (active >= 0) {
@@ -56,7 +66,7 @@ class DayPicker extends BasePicker {
   getDisabledDaysPositions() {
     /*
       Return position numbers of dates that should be displayed as disabled
-      (position in array returned by `this.buildDays`).
+      (position in array returned by `this.buildCalendarValues`).
     */
     const {
       disable,
@@ -126,12 +136,13 @@ class DayPicker extends BasePicker {
     return (
       <DayView
         { ...rest }
-        days={this.buildDays()}
+        days={this.buildCalendarValues()}
         hasNextPage={this.isNextPageAvailable()}
         hasPrevPage={this.isPrevPageAvailable()}
         onNextPageBtnClick={this.switchToNextPage}
         onPrevPageBtnClick={this.switchToPrevPage}
         onDayClick={this.handleChange}
+        ref={e => this.calendarNode = ReactDOM.findDOMNode(e)}
         hovered={this.state.hoveredCellPosition}
         onCellHover={this.onHoveredCellPositionChange}
         currentDate={this.getCurrentDate()}

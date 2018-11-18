@@ -49,7 +49,7 @@ class DateTimeForm extends React.Component {
   render() {
     return (
       <Form>
-        {/* <DateInput
+        <DateInput
           placeholder="Date"
           popupPosition="bottom right"
           className="example-calendar-input"
@@ -58,6 +58,7 @@ class DateTimeForm extends React.Component {
           iconPosition="left"
           preserveViewMode={false}
           autoComplete="off"
+          tabIndex="0"
           onChange={this.handleChange} />
         <br />
         <DateInput
@@ -69,9 +70,10 @@ class DateTimeForm extends React.Component {
           value={this.state.dateStartYear}
           iconPosition="left"
           autoComplete="off"
+          tabIndex="1"
           preserveViewMode={false}
           onChange={this.handleChange} />
-        <br /> */}
+        <br />
         {/* <TimeInput
           placeholder="Time"
           popupPosition="bottom right"
@@ -113,6 +115,7 @@ class DateTimeForm extends React.Component {
           value={this.state.year}
           iconPosition="left"
           autoComplete="off"
+          tabIndex="2"
           onChange={this.handleChange} />
         <br />
         <input

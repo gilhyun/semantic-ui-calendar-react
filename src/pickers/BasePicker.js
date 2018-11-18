@@ -42,6 +42,18 @@ class BasePicker extends React.Component {
     }
   }
 
+  handleEnterKeyPress = (event) => {
+    const key = keyboardKey.getKey(event);
+    if (key === 'Enter' && this.isPickerInFocus()) {
+      event.preventDefault();
+      const selectedValue = this.buildCalendarValues()[this.state.hoveredCellPosition];
+      this.handleChange(null, {
+        value: selectedValue,
+        itemPosition: this.state.hoveredCellPosition,
+      });
+    }
+  }
+
   handleArrowKeyPress = (event) => {
     if (!this.isPickerInFocus()) {
       return;

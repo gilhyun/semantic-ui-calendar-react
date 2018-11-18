@@ -62,6 +62,7 @@ class InputView extends React.Component {
 }
 
 InputView.propTypes = {
+  render: PropTypes.func.isRequired,
   /** Whether to display inline picker or picker inside a popup. */
   inline: PropTypes.bool,
   /** Where to display popup. */
