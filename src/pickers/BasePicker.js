@@ -54,6 +54,10 @@ class BasePicker extends React.Component {
     }
   }
 
+  handleBlur = () => {
+    this.props.closePopup && this.props.closePopup();
+  }
+
   handleArrowKeyPress = (event) => {
     if (!this.isPickerInFocus()) {
       return;

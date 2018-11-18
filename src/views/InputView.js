@@ -20,7 +20,6 @@ class InputView extends React.Component {
       onChange,
       inlineLabel,
       popupIsClosed,
-      onPopupUnmount,
       mountNode,
       tabIndex,
     } = this.props;
@@ -46,7 +45,6 @@ class InputView extends React.Component {
         hoverable={closeOnMouseLeave}
         flowing
         mountNode={mountNode}
-        onUnmount={onPopupUnmount}
         style={popupStyle}
         hideOnScroll
         on="focus"
@@ -79,8 +77,6 @@ InputView.propTypes = {
   inlineLabel: PropTypes.bool,
   /** Whether popup is closed. */
   popupIsClosed: PropTypes.bool,
-  /** Called when popup is forsed to close. */
-  onPopupUnmount: PropTypes.func,
   /** The node where the picker should mount. */
   mountNode: PropTypes.any,
   tabIndex: PropTypes.oneOfType([

@@ -92,7 +92,6 @@ class TimeInput extends BaseInput {
     return (
       <InputView
         popupIsClosed={this.state.popupIsClosed}
-        onPopupUnmount={this.onPopupClose}
         icon="time"
         { ...rest }
         value={value}

@@ -184,7 +184,6 @@ class DateTimeInput extends BaseInput {
     return (
       <InputView
         popupIsClosed={this.state.popupIsClosed}
-        onPopupUnmount={this.onPopupClose}
         icon="calendar"
         onFocus={this._onFocus}
         { ...rest }

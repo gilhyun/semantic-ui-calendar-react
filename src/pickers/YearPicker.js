@@ -205,6 +205,8 @@ YearPicker.propTypes = {
   minDate: PropTypes.instanceOf(moment),
   /** Maximal year that could be selected. */
   maxDate: PropTypes.instanceOf(moment),
+  /** Force popup to close. */
+  closePopup: PropTypes.func,
 };
 
 export default YearPicker;

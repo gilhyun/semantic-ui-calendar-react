@@ -142,6 +142,7 @@ class DayPicker extends BasePicker {
         onNextPageBtnClick={this.switchToNextPage}
         onPrevPageBtnClick={this.switchToPrevPage}
         onDayClick={this.handleChange}
+        onBlur={this.handleBlur}
         ref={e => this.calendarNode = ReactDOM.findDOMNode(e)}
         hovered={this.state.hoveredCellPosition}
         onCellHover={this.onHoveredCellPositionChange}
@@ -172,6 +173,8 @@ DayPicker.propTypes = {
   minDate: PropTypes.instanceOf(moment),
   /** Maximal date that could be selected. */
   maxDate: PropTypes.instanceOf(moment),
+  /** Force popup to close. */
+  closePopup: PropTypes.func,
 };
 
 export default DayPicker;

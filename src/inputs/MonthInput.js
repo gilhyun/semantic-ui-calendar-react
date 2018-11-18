@@ -48,7 +48,6 @@ class MonthInput extends BaseInput {
     return (
       <InputView
         popupIsClosed={this.state.popupIsClosed}
-        onPopupUnmount={this.onPopupClose}
         icon="calendar"
         { ...rest }
         value={value}

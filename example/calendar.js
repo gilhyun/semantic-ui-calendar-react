@@ -81,6 +81,7 @@ class DateTimeForm extends React.Component {
           name="time"
           autoComplete="off"
           tabIndex="2"
+          closable
           value={this.state.time}
           iconPosition="left"
           disableMinute={false}
@@ -93,6 +94,7 @@ class DateTimeForm extends React.Component {
           name="dateTime"
           value={this.state.dateTime}
           iconPosition="left"
+          closable
           preserveViewMode={false}
           autoComplete="off"
           tabIndex="3"
@@ -104,6 +106,7 @@ class DateTimeForm extends React.Component {
           popupPosition="bottom right"
           className="example-calendar-input"
           name="datesRange"
+          closable
           value={this.state.datesRange}
           iconPosition="left"
           autoComplete="off"
@@ -117,6 +120,7 @@ class DateTimeForm extends React.Component {
           popupPosition="bottom right"
           value={this.state.year}
           iconPosition="left"
+          closable
           autoComplete="off"
           tabIndex="5"
           onChange={this.handleChange} />
@@ -129,6 +133,7 @@ class DateTimeForm extends React.Component {
           value={this.state.month}
           iconPosition="left"
           autoComplete="off"
+          closable
           tabIndex="6"
           onChange={this.handleChange} />
       </Form>

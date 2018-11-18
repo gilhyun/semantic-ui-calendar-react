@@ -79,6 +79,7 @@ class DateInput extends BaseInput {
       enable,
     } = this.props;
     const pickerProps = {
+      closePopup: this.closePopup,
       tabIndex,
       hasHeader: true,
       onChange: this.handleSelect,
@@ -154,7 +155,6 @@ class DateInput extends BaseInput {
     return (
       <InputView
         popupIsClosed={this.state.popupIsClosed}
-        onPopupUnmount={this.onPopupClose}
         icon="calendar"
         onFocus={this._onFocus}
         { ...rest }
