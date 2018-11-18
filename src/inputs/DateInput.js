@@ -68,7 +68,7 @@ class DateInput extends BaseInput {
     }
   }
 
-  getPicker() {
+  getPicker({ tabIndex }) {
     const {
       value,
       initialDate,
@@ -79,6 +79,7 @@ class DateInput extends BaseInput {
       enable,
     } = this.props;
     const pickerProps = {
+      tabIndex,
       hasHeader: true,
       onChange: this.handleSelect,
       onHeaderClick: this.switchToPrevMode,
@@ -157,9 +158,9 @@ class DateInput extends BaseInput {
         icon="calendar"
         onFocus={this._onFocus}
         { ...rest }
-        value={chooseValue(value, undefined)}>
-        { this.getPicker() }
-      </InputView>
+        render={(props) => this.getPicker(props)}
+        value={chooseValue(value, undefined)}
+      />
     );
   }
 }

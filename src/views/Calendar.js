@@ -3,12 +3,17 @@ import { Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 function Calendar(props) {
+  const {
+    children,
+    ...rest
+  } = props;
   return (
     <Table
       unstackable
       celled
+      {...rest}
       textAlign="center">
-      { props.children }
+      { children }
     </Table>
   );
 }

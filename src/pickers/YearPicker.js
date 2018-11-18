@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
@@ -7,9 +8,9 @@ import YearView from '../views/YearView';
 import { getUnhandledProps } from '../lib';
 import BasePicker from './BasePicker';
 
-const PAGE_WITH = 3;
+const PAGE_WIDTH = 3;
 const PAGE_HEIGHT = 4;
-const YEARS_ON_PAGE = PAGE_WITH * PAGE_HEIGHT;
+const YEARS_ON_PAGE = PAGE_WIDTH * PAGE_HEIGHT;
 
 class YearPicker extends BasePicker {
   /*
@@ -23,6 +24,7 @@ class YearPicker extends BasePicker {
       /* moment instance */
       date: props.initializeWith.clone(),
     };
+    this.PAGE_WIDTH = PAGE_WIDTH;
   }
 
   buildYears() {
@@ -58,37 +60,11 @@ class YearPicker extends BasePicker {
     }
   }
 
-  getFirstActiveCellOnPage = () => {
-    const activeOnly = _.filter(
+  getSelectableCellPositions = () => {
+    return _.filter(
       _.range(0, YEARS_ON_PAGE),
       y => !_.includes(this.getDisabledYearsPositions(), y),
     );
-    return activeOnly[0];
-  }
-
-  getLastActiveCellOnPage = () => {
-    const activeOnly = _.filter(
-      _.range(0, YEARS_ON_PAGE),
-      y => !_.includes(this.getDisabledYearsPositions(), y),
-    );
-    return activeOnly[activeOnly.length - 1];
-  }
-
-  // core
-  shouldSwitchPage = () => {
-    // case <- or ->
-    //   next < start => -1
-    //   next > start => 1
-    //   0
-    // case up or down
-    //   next - width < start => -1
-    //   next + width > end => 1
-    //   0
-  }
-
-  // core
-  getNextHoveredCellPosition = (key, curPos, width) => {
-    // skips disabled cells
   }
 
   getDisabledYearsPositions() {
@@ -173,20 +149,20 @@ class YearPicker extends BasePicker {
     _.invoke(this.props, 'onChange', e, { ...this.props, value: { year } });
   }
 
-  switchToNextPage = () => {
+  switchToNextPage = (e, data, callback) => {
     this.setState(({ date }) => {
       const nextDate = date.clone();
       nextDate.add(YEARS_ON_PAGE, 'year');
       return { date: nextDate };
-    });
+    }, callback);
   }
 
-  switchToPrevPage = () => {
+  switchToPrevPage = (e, data, callback) => {
     this.setState(({ date }) => {
       const prevDate = date.clone();
       prevDate.subtract(YEARS_ON_PAGE, 'year');
       return { date: prevDate };
-    });
+    }, callback);
   }
 
   render() {
@@ -198,6 +174,7 @@ class YearPicker extends BasePicker {
         onNextPageBtnClick={this.switchToNextPage}
         onPrevPageBtnClick={this.switchToPrevPage}
         onYearClick={this.handleChange}
+        ref={e => this.calendarNode = ReactDOM.findDOMNode(e)}
         hovered={this.state.hoveredCellPosition}
         onCellHover={this.onHoveredCellPositionChange}
         hasPrevPage={this.isPrevPageAvailable()}

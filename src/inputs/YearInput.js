@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
@@ -56,15 +57,21 @@ class YearInput extends BaseInput {
         onPopupUnmount={this.onPopupClose}
         icon="calendar"
         { ...rest }
-        value={value}>
-        <YearPicker
-          onChange={this.handleSelect}
-          initializeWith={initializeWith}
-          value={parseValue(value, dateFormat)}
-          disable={parseArrayOrValue(disable, dateFormat)}
-          maxDate={parseValue(maxDate, dateFormat)}
-          minDate={parseValue(minDate, dateFormat)} />
-      </InputView>
+        value={value}
+        render={
+          (pickerProps) => (
+            <YearPicker
+              {...pickerProps}
+              onChange={this.handleSelect}
+              initializeWith={initializeWith}
+              value={parseValue(value, dateFormat)}
+              disable={parseArrayOrValue(disable, dateFormat)}
+              maxDate={parseValue(maxDate, dateFormat)}
+              minDate={parseValue(minDate, dateFormat)}
+            />
+          )
+        }
+      />
     );
   }
 }

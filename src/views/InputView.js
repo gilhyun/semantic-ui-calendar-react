@@ -9,46 +9,56 @@ const popupStyle = {
   filter: 'none', // prevents bluring popup when used inside Modal with dimmer="bluring" #28 #26
 };
 
-function InputView(props) {
-  const {
-    popupPosition,
-    inline,
-    value,
-    closeOnMouseLeave,
-    onChange,
-    inlineLabel,
-    popupIsClosed,
-    onPopupUnmount,
-    mountNode,
-  } = props;
-  const rest = getUnhandledProps(InputView, props);
+class InputView extends React.Component {
 
-  const inputElement = (
-    <Form.Input
-      { ...rest }
-      value={value}
-      inline={inlineLabel}
-      onChange={onChange} />
-  );
-
-  if (inline) return props.children;
-  return (
-    <Popup
-      position={popupPosition}
-      open={popupIsClosed? false : undefined}
-      trigger={inputElement}
-      hoverable={closeOnMouseLeave}
-      flowing
-      tabIndex={1}
-      mountNode={mountNode}
-      onUnmount={onPopupUnmount}
-      style={popupStyle}
-      hideOnScroll
-      on="focus"
-    >
-      { props.children }
-    </Popup>
-  );
+  render() {
+    const {
+      popupPosition,
+      inline,
+      value,
+      closeOnMouseLeave,
+      onChange,
+      inlineLabel,
+      popupIsClosed,
+      onPopupUnmount,
+      mountNode,
+      tabIndex,
+    } = this.props;
+    const rest = getUnhandledProps(InputView, this.props);
+  
+    const inputElement = (
+      <Form.Input
+        { ...rest }
+        value={value}
+        tabIndex={tabIndex}
+        inline={inlineLabel}
+        onChange={onChange} />
+    );
+  
+    if (inline) return this.props.render({
+      tabIndex: (parseInt(tabIndex) + 1).toString(),
+    });
+    return (
+      <Popup
+        position={popupPosition}
+        open={popupIsClosed? false : undefined}
+        trigger={inputElement}
+        hoverable={closeOnMouseLeave}
+        flowing
+        mountNode={mountNode}
+        onUnmount={onPopupUnmount}
+        style={popupStyle}
+        hideOnScroll
+        on="focus"
+      >
+        {
+          this.props.render({
+            tabIndex: (parseInt(tabIndex)).toString(),
+          })
+        }
+      </Popup>
+    );
+  }
 }
 
 InputView.propTypes = {
@@ -72,11 +82,13 @@ InputView.propTypes = {
   onPopupUnmount: PropTypes.func,
   /** The node where the picker should mount. */
   mountNode: PropTypes.any,
+  tabIndex: PropTypes.string,
 };
 
 InputView.defaultProps = {
   inline: false,
-  closeOnMouseLeave: true
+  closeOnMouseLeave: true,
+  tabIndex: '0',
 };
 
 export default InputView;

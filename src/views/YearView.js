@@ -8,42 +8,45 @@ import Body from './CalendarBody/Body';
 
 const YEAR_CALENDAR_ROW_WIDTH = '3';
 
-function YearView(props) {
-  const {
-    years,
-    onNextPageBtnClick,
-    onPrevPageBtnClick,
-    onYearClick,
-    hasNextPage,
-    hasPrevPage,
-    onHeaderClick,
-    disabled,
-    active,
-    hovered,
-    onCellHover,
-  } = props;
-  const headerTitle = `${_.first(years)} - ${_.last(years)}`;
-  return (
-    <Calendar>
-      <Header
-        title={headerTitle}
-        onNextPageBtnClick={onNextPageBtnClick}
-        onPrevPageBtnClick={onPrevPageBtnClick}
-        hasNextPage={hasNextPage}
-        hasPrevPage={hasPrevPage}
-        onHeaderClick={onHeaderClick}
-        width={YEAR_CALENDAR_ROW_WIDTH}
-        displayWeeks={false} />
-      <Body
-        width={YEAR_CALENDAR_ROW_WIDTH}
-        data={years}
-        hovered={hovered}
-        onCellHover={onCellHover}
-        onCellClick={onYearClick}
-        active={active}
-        disabled={disabled} />
-    </Calendar>
-  );
+class YearView extends React.Component {
+  render() {
+    const {
+      years,
+      onNextPageBtnClick,
+      onPrevPageBtnClick,
+      onYearClick,
+      hasNextPage,
+      hasPrevPage,
+      onHeaderClick,
+      disabled,
+      active,
+      hovered,
+      onCellHover,
+      ...rest
+    } = this.props;
+    const headerTitle = `${_.first(years)} - ${_.last(years)}`;
+    return (
+      <Calendar {...rest}>
+        <Header
+          title={headerTitle}
+          onNextPageBtnClick={onNextPageBtnClick}
+          onPrevPageBtnClick={onPrevPageBtnClick}
+          hasNextPage={hasNextPage}
+          hasPrevPage={hasPrevPage}
+          onHeaderClick={onHeaderClick}
+          width={YEAR_CALENDAR_ROW_WIDTH}
+          displayWeeks={false} />
+        <Body
+          width={YEAR_CALENDAR_ROW_WIDTH}
+          data={years}
+          hovered={hovered}
+          onCellHover={onCellHover}
+          onCellClick={onYearClick}
+          active={active}
+          disabled={disabled} />
+      </Calendar>
+    );
+  }
 }
 
 YearView.propTypes = {
