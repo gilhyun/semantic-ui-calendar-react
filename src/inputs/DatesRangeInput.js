@@ -96,16 +96,19 @@ class DatesRangeInput extends BaseInput {
         onPopupUnmount={this.onPopupClose}
         icon="calendar"
         { ...rest }
-        value={value}>
-        <DatesRangePicker
-          onChange={this.handleSelect}
-          dateFormat={dateFormat}
-          initializeWith={getInitializer({ initialDate, dateFormat })}
-          start={start}
-          end={end}
-          minDate={parseValue(minDate, dateFormat)}
-          maxDate={parseValue(maxDate, dateFormat)} />
-      </InputView>
+        value={value}
+        render={(pickerProps) =>
+          (<DatesRangePicker
+            {...pickerProps}
+            onChange={this.handleSelect}
+            dateFormat={dateFormat}
+            initializeWith={getInitializer({ initialDate, dateFormat })}
+            start={start}
+            end={end}
+            minDate={parseValue(minDate, dateFormat)}
+            maxDate={parseValue(maxDate, dateFormat)} />)
+        }
+      />
     );
   }
 }

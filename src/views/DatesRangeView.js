@@ -22,48 +22,51 @@ function getActive(start, end) {
   }
 }
 
-function DatesRangeView(props) {
-  const {
-    days,
-    onNextPageBtnClick,
-    onPrevPageBtnClick,
-    onDayClick,
-    hasPrevPage,
-    hasNextPage,
-    currentDate,
-    onHeaderClick,
-    active,
-    disabled,
-    selectedRange,
-    hovered,
-    onCellHover,
-  } = props;
-  const {
-    start,
-    end,
-  } = active;
-  return (
-    <Calendar>
-      <Header
-        width={DAY_CALENDAR_ROW_WIDTH}
-        displayWeeks
-        rangeRowContent={selectedRange}
-        onNextPageBtnClick={onNextPageBtnClick}
-        onPrevPageBtnClick={onPrevPageBtnClick}
-        hasNextPage={hasNextPage}
-        hasPrevPage={hasPrevPage}
-        title={currentDate}
-        onHeaderClick={onHeaderClick} />
-      <Body
-        width={DAY_CALENDAR_ROW_WIDTH}
-        data={days}
-        onCellClick={onDayClick}
-        onCellHover={onCellHover}
-        hovered={hovered}
-        active={getActive(start, end)}
-        disabled={disabled} />
-    </Calendar>
-  );
+class DatesRangeView extends React.Component {
+  render() {
+    const {
+      days,
+      onNextPageBtnClick,
+      onPrevPageBtnClick,
+      onDayClick,
+      hasPrevPage,
+      hasNextPage,
+      currentDate,
+      onHeaderClick,
+      active,
+      disabled,
+      selectedRange,
+      hovered,
+      onCellHover,
+      ...rest
+    } = this.props;
+    const {
+      start,
+      end,
+    } = active;
+    return (
+      <Calendar {...rest}>
+        <Header
+          width={DAY_CALENDAR_ROW_WIDTH}
+          displayWeeks
+          rangeRowContent={selectedRange}
+          onNextPageBtnClick={onNextPageBtnClick}
+          onPrevPageBtnClick={onPrevPageBtnClick}
+          hasNextPage={hasNextPage}
+          hasPrevPage={hasPrevPage}
+          title={currentDate}
+          onHeaderClick={onHeaderClick} />
+        <Body
+          width={DAY_CALENDAR_ROW_WIDTH}
+          data={days}
+          onCellClick={onDayClick}
+          onCellHover={onCellHover}
+          hovered={hovered}
+          active={getActive(start, end)}
+          disabled={disabled} />
+      </Calendar>
+    );
+  }
 }
 
 DatesRangeView.propTypes = {
