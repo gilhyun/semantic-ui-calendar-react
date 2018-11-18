@@ -7,45 +7,48 @@ import Body from './CalendarBody/Body';
 
 const MONTH_CALENDAR_ROW_WIDTH = '3';
 
-function MonthView(props) {
-  const {
-    months,
-    hasHeader,
-    onMonthClick,
-    onNextPageBtnClick,
-    onPrevPageBtnClick,
-    hasPrevPage,
-    hasNextPage,
-    onHeaderClick,
-    disabled,
-    active,
-    currentYear,
-    onCellHover,
-    hovered,
-  } = props;
-  const headerProps = {
-    onNextPageBtnClick,
-    onPrevPageBtnClick,
-    hasPrevPage,
-    hasNextPage,
-    onHeaderClick,
-    title: currentYear,
-    displayWeeks: false,
-    width: MONTH_CALENDAR_ROW_WIDTH,
-  };
-  return (
-    <Calendar>
-      { hasHeader && <Header { ...headerProps } /> }
-      <Body
-        width={MONTH_CALENDAR_ROW_WIDTH}
-        data={months}
-        onCellClick={onMonthClick}
-        onCellHover={onCellHover}
-        active={active}
-        hovered={hovered}
-        disabled={disabled} />
-    </Calendar>
-  );
+class MonthView extends React.Component {
+  render() {
+    const {
+      months,
+      hasHeader,
+      onMonthClick,
+      onNextPageBtnClick,
+      onPrevPageBtnClick,
+      hasPrevPage,
+      hasNextPage,
+      onHeaderClick,
+      disabled,
+      active,
+      currentYear,
+      onCellHover,
+      hovered,
+      ...rest
+    } = this.props;
+    const headerProps = {
+      onNextPageBtnClick,
+      onPrevPageBtnClick,
+      hasPrevPage,
+      hasNextPage,
+      onHeaderClick,
+      title: currentYear,
+      displayWeeks: false,
+      width: MONTH_CALENDAR_ROW_WIDTH,
+    };
+    return (
+      <Calendar {...rest}>
+        { hasHeader && <Header { ...headerProps } /> }
+        <Body
+          width={MONTH_CALENDAR_ROW_WIDTH}
+          data={months}
+          onCellClick={onMonthClick}
+          onCellHover={onCellHover}
+          active={active}
+          hovered={hovered}
+          disabled={disabled} />
+      </Calendar>
+    );
+  }
 }
 
 MonthView.propTypes = {

@@ -121,10 +121,7 @@ class DateTimeForm extends React.Component {
           tabIndex="5"
           onChange={this.handleChange} />
         <br />
-        <input
-          type="text"
-        />
-        {/* <MonthInput
+        <MonthInput
           placeholder="Month"
           className="example-calendar-input"
           name="month"
@@ -132,7 +129,8 @@ class DateTimeForm extends React.Component {
           value={this.state.month}
           iconPosition="left"
           autoComplete="off"
-          onChange={this.handleChange} /> */}
+          tabIndex="6"
+          onChange={this.handleChange} />
       </Form>
     );
   }
@@ -179,7 +177,7 @@ class DateTimeFormInline extends React.Component {
   render() {
     return (
       <Form>
-        {/* <DateInput
+        <DateInput
           disable={['17-05-2018', '21-05-2018']}
           inline
           className="example-calendar-input"
@@ -203,18 +201,18 @@ class DateTimeFormInline extends React.Component {
           className="example-calendar-input"
           value={this.state.datesRange}
           onChange={this.handleDatesRangeChange} />
-        <br /> */}
+        <br />
         <YearInput
           inline
           className="example-calendar-input"
           value={this.state.year}
           onChange={this.handleYearChange} />
         <br />
-        {/* <MonthInput
+        <MonthInput
           inline
           className="example-calendar-input"
           value={this.state.month}
-          onChange={this.handleMonthChange} /> */}
+          onChange={this.handleMonthChange} />
       </Form>
     );
   }

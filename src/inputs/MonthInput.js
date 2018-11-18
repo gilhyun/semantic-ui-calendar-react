@@ -51,16 +51,19 @@ class MonthInput extends BaseInput {
         onPopupUnmount={this.onPopupClose}
         icon="calendar"
         { ...rest }
-        value={value}>
-        <MonthPicker
-          hasHeader={false}
-          onChange={this.handleSelect}
-          initializeWith={getInitializer({ initialDate, dateFormat })}
-          value={parseValue(value, dateFormat)}
-          disable={parseArrayOrValue(disable, dateFormat)}
-          maxDate={parseValue(maxDate, dateFormat)}
-          minDate={parseValue(minDate, dateFormat)} />
-      </InputView>
+        value={value}
+        render={(pickerProps) => (
+          <MonthPicker
+            {...pickerProps}
+            hasHeader={false}
+            onChange={this.handleSelect}
+            initializeWith={getInitializer({ initialDate, dateFormat })}
+            value={parseValue(value, dateFormat)}
+            disable={parseArrayOrValue(disable, dateFormat)}
+            maxDate={parseValue(maxDate, dateFormat)}
+            minDate={parseValue(minDate, dateFormat)} />
+        )}
+      />
     );
   }
 }
