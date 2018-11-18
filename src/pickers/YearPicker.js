@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import _ from 'lodash';
+import keyboardKey from 'keyboard-key';
 
 import YearView from '../views/YearView';
 import { getUnhandledProps } from '../lib';
@@ -163,6 +164,15 @@ class YearPicker extends BasePicker {
       prevDate.subtract(YEARS_ON_PAGE, 'year');
       return { date: prevDate };
     }, callback);
+  }
+
+  handleEnterKeyPress = (event) => {
+    const key = keyboardKey.getKey(event);
+    if (key === 'Enter' && this.isPickerInFocus()) {
+      event.preventDefault();
+      const selectedValue = this.buildYears()[this.state.hoveredCellPosition];
+      this.handleChange(null, { value: selectedValue });
+    }
   }
 
   render() {
