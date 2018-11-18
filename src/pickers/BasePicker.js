@@ -32,11 +32,11 @@ class BasePicker extends React.Component {
     if (!this.isPickerInFocus()) {
       return;
     }
-    event.preventDefault();
     const key = keyboardKey.getKey(event);
     const selectableCells = this.getSelectableCellPositions();
     switch(key) {
     case 'ArrowLeft':
+      event.preventDefault();
       if (_.includes(selectableCells, this.state.hoveredCellPosition - 1)) {
         this.onHoveredCellPositionChange(null, { itemPosition: this.state.hoveredCellPosition - 1 });
       } else {
@@ -47,6 +47,7 @@ class BasePicker extends React.Component {
       }
       break;
     case 'ArrowRight':
+      event.preventDefault();
       if (_.includes(selectableCells, this.state.hoveredCellPosition + 1)) {
         this.onHoveredCellPositionChange(null, { itemPosition: this.state.hoveredCellPosition + 1 });
       } else {
@@ -57,11 +58,13 @@ class BasePicker extends React.Component {
       }
       break;
     case 'ArrowUp':
+      event.preventDefault();
       if (_.includes(selectableCells, this.state.hoveredCellPosition - this.PAGE_WIDTH)) {
         this.onHoveredCellPositionChange(null, { itemPosition: this.state.hoveredCellPosition - this.PAGE_WIDTH });
       }
       break;
     case 'ArrowDown':
+      event.preventDefault();
       if (_.includes(selectableCells, this.state.hoveredCellPosition + this.PAGE_WIDTH)) {
         this.onHoveredCellPositionChange(null, { itemPosition: this.state.hoveredCellPosition + this.PAGE_WIDTH });
       }

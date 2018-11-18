@@ -115,6 +115,9 @@ class DateTimeForm extends React.Component {
           autoComplete="off"
           onChange={this.handleChange} />
         <br />
+        <input
+          type="text"
+        />
         {/* <MonthInput
           placeholder="Month"
           className="example-calendar-input"

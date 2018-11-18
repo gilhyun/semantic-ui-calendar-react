@@ -30,13 +30,13 @@ class InputView extends React.Component {
       <Form.Input
         { ...rest }
         value={value}
-        tabIndex={tabIndex}
+        tabIndex={parseInt(tabIndex) + 1} // +1 makes possible to focus calendar inside a popup via Tab
         inline={inlineLabel}
         onChange={onChange} />
     );
   
     if (inline) return this.props.render({
-      tabIndex: (parseInt(tabIndex) + 1).toString(),
+      tabIndex,
     });
     return (
       <Popup
@@ -53,7 +53,7 @@ class InputView extends React.Component {
       >
         {
           this.props.render({
-            tabIndex: (parseInt(tabIndex)).toString(),
+            tabIndex: parseInt(tabIndex) + 1, // +1 makes possible to focus calendar inside a popup via Tab
           })
         }
       </Popup>
@@ -82,7 +82,10 @@ InputView.propTypes = {
   onPopupUnmount: PropTypes.func,
   /** The node where the picker should mount. */
   mountNode: PropTypes.any,
-  tabIndex: PropTypes.string,
+  tabIndex: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 };
 
 InputView.defaultProps = {
