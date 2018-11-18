@@ -1,14 +1,16 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 import Calendar from './Calendar';
 import Header from './CalendarHeader/Header';
 import Body from './CalendarBody/Body';
+import BaseView from './BaseView';
 
 const YEAR_CALENDAR_ROW_WIDTH = '3';
 
-class YearView extends React.Component {
+class YearView extends BaseView {
   render() {
     const {
       years,
@@ -26,7 +28,7 @@ class YearView extends React.Component {
     } = this.props;
     const headerTitle = `${_.first(years)} - ${_.last(years)}`;
     return (
-      <Calendar {...rest}>
+      <Calendar ref={e => this.calendarNode = ReactDOM.findDOMNode(e)} {...rest}>
         <Header
           title={headerTitle}
           onNextPageBtnClick={onNextPageBtnClick}

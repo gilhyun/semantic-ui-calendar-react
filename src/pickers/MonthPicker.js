@@ -170,6 +170,7 @@ class MonthPicker extends BasePicker {
         hasPrevPage={this.isPrevPageAvailable()}
         hasNextPage={this.isNextPageAvailable()}
         onBlur={this.handleBlur}
+        onMount={this.props.onViewMount}
         ref={e => this.calendarNode = ReactDOM.findDOMNode(e)}
         disabled={this.getDisabledMonthsPositions()}
         active={this.getActiveCellPosition()}

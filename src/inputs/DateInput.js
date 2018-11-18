@@ -79,7 +79,9 @@ class DateInput extends BaseInput {
       enable,
     } = this.props;
     const pickerProps = {
+      onViewMount: this.onViewMount,
       closePopup: this.closePopup,
+      popupIsClosed: this.state.popupIsClosed,
       tabIndex,
       hasHeader: true,
       onChange: this.handleSelect,
@@ -105,7 +107,7 @@ class DateInput extends BaseInput {
   _switchToNextModeUndelayed = () => {
     this.setState(({ mode }) => {
       return { mode: getNextMode(mode) };
-    });
+    }, this.onModeSwitch);
   }
 
   switchToNextMode = () => {
@@ -115,7 +117,7 @@ class DateInput extends BaseInput {
   _switchToPrevModeUndelayed = () => {
     this.setState(({ mode }) => {
       return { mode: getPrevMode(mode) };
-    });
+    }, this.onModeSwitch);
   }
 
   switchToPrevMode = () => {
@@ -136,15 +138,12 @@ class DateInput extends BaseInput {
       const {
         mode,
       } = prevState;
-      let nextMode = mode;
-      if (mode !== 'day') {
-        nextMode = getNextMode(mode);
-      } else {
+      if (mode === 'day') {
         const outValue = moment(value).format(this.props.dateFormat);
         _.invoke(this.props, 'onChange', e, { ...this.props, value: outValue });
       }
-      return { mode: nextMode, ...value };
-    });
+      return { ...value };
+    }, () => this.state.mode !== 'day' && this.switchToNextMode());
   }
 
   render() {

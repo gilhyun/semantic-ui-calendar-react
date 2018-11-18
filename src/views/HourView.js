@@ -1,13 +1,15 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import Calendar from './Calendar';
 import Header from './CalendarHeader/Header';
 import Body from './CalendarBody/Body';
+import BaseView from './BaseView';
 
 const HOUR_CALENDAR_ROW_WIDTH = '4';
 
-class HourView extends React.Component {
+class HourView extends BaseView {
   render() {
     const {
       hours,
@@ -36,7 +38,7 @@ class HourView extends React.Component {
       displayWeeks: false,
     };
     return (
-      <Calendar {...rest}>
+      <Calendar ref={e => this.calendarNode = ReactDOM.findDOMNode(e)} {...rest}>
         { hasHeader && <Header { ...headerProps } /> }
         <Body
           data={hours}

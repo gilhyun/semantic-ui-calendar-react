@@ -143,6 +143,7 @@ class DayPicker extends BasePicker {
         onPrevPageBtnClick={this.switchToPrevPage}
         onDayClick={this.handleChange}
         onBlur={this.handleBlur}
+        onMount={this.props.onViewMount}
         ref={e => this.calendarNode = ReactDOM.findDOMNode(e)}
         hovered={this.state.hoveredCellPosition}
         onCellHover={this.onHoveredCellPositionChange}

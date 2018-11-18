@@ -100,6 +100,7 @@ class DateTimeInput extends BaseInput {
     const dateTimeFormat = this.getDateTimeFormat();
     const pickerProps = {
       tabIndex,
+      onViewMount: this.onViewMount,
       closePopup: this.closePopup,
       displayWeeks: true,
       hasHeader: true,
@@ -131,7 +132,7 @@ class DateTimeInput extends BaseInput {
   _switchToNextModeUndelayed = () => {
     this.setState(({ mode }) => {
       return { mode: getNextMode(mode) };
-    });
+    }, this.onModeSwitch);
   }
 
   switchToNextMode = () => {
@@ -141,7 +142,7 @@ class DateTimeInput extends BaseInput {
   _switchToPrevModeUndelayed = () => {
     this.setState(({ mode }) => {
       return { mode: getPrevMode(mode) };
-    });
+    }, this.onModeSwitch);
   }
 
   switchToPrevMode = () => {
@@ -166,15 +167,12 @@ class DateTimeInput extends BaseInput {
       const {
         mode,
       } = prevState;
-      let nextMode = mode;
-      if (mode !== 'minute') {
-        nextMode = getNextMode(mode);
-      } else {
+      if (mode === 'minute') {
         const outValue = moment(value).format(this.getDateTimeFormat());
         _.invoke(this.props, 'onChange', e, { ...this.props, value: outValue });
       }
-      return { mode: nextMode, ...value };
-    });
+      return { ...value };
+    }, () => this.state.mode !== 'minute' && this.switchToNextMode());
   }
 
   render() {

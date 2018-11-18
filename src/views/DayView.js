@@ -1,14 +1,16 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import Calendar from './Calendar';
 import Header from './CalendarHeader/Header';
 import Body from './CalendarBody/Body';
+import BaseView from './BaseView';
 
 export const DAY_CALENDAR_ROW_WIDTH = '7';
 export const WEEKS_TO_DISPLAY = 6;
 
-class DayView extends React.Component {
+class DayView extends BaseView {
   render() {
     const {
       days,
@@ -27,7 +29,7 @@ class DayView extends React.Component {
       ...rest
     } = this.props;
     return (
-      <Calendar {...rest}>
+      <Calendar ref={e => this.calendarNode = ReactDOM.findDOMNode(e)} {...rest}>
         <Header
           width={DAY_CALENDAR_ROW_WIDTH}
           displayWeeks={true}

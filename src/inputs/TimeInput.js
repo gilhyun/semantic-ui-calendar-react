@@ -58,9 +58,13 @@ class TimeInput extends BaseInput {
       this.closePopup();
     }
     if(!disableMinute)
-      this.setState((prevState) => {
-        return { mode: getNextMode(prevState.mode) };
-      });
+      this.switchToNextMode();
+  }
+
+  switchToNextMode = () => {
+    this.setState(({ mode }) => {
+      return { mode: getNextMode(mode) };
+    }, this.onModeSwitch);
   }
 
   getPicker({ tabIndex }) {
@@ -70,6 +74,7 @@ class TimeInput extends BaseInput {
     } = this.props;
     const currentValue = parseValue(value, TIME_FORMAT[timeFormat]);
     const pickerProps = {
+      onViewMount: this.onViewMount,
       hasHeader: false,
       closePopup: this.closePopup,
       initializeWith: getInitializer({ initialDate: currentValue, dateFormat: TIME_FORMAT[timeFormat] }),

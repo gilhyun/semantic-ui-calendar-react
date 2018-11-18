@@ -110,6 +110,7 @@ class MinutePicker extends BasePicker {
         hovered={this.state.hoveredCellPosition}
         onCellHover={this.onHoveredCellPositionChange}
         onBlur={this.handleBlur}
+        onMount={this.props.onViewMount}
         ref={e => this.calendarNode = ReactDOM.findDOMNode(e)}
         hasNextPage={this.isNextPageAvailable()}
         hasPrevPage={this.isPrevPageAvailable()}

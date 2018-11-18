@@ -16,6 +16,22 @@ class BaseInput extends React.Component {
       popupIsClosed: false,
     });
   }
+
+  onModeSwitch = () => {
+    // when using keyboard for selecting values on calendar
+    // and when mode switches, picker looses focus.
+    // In order to preserve focus on active picker
+    // we call focus() on `calendarNode`.
+    // `calendarNode` goes from *View component via
+    // `this.onViewMount` callback
+    if (document.activeElement !== this.calendarNode) {
+      this.calendarNode && this.calendarNode.focus();
+    }
+  }
+
+  onViewMount = (calendarNode) => {
+    this.calendarNode = calendarNode;
+  }
 }
 
 export default BaseInput;

@@ -1,13 +1,15 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import Calendar from './Calendar';
 import Header from './CalendarHeader/Header';
 import Body from './CalendarBody/Body';
+import BaseView from './BaseView';
 
 const MONTH_CALENDAR_ROW_WIDTH = '3';
 
-class MonthView extends React.Component {
+class MonthView extends BaseView {
   render() {
     const {
       months,
@@ -36,7 +38,7 @@ class MonthView extends React.Component {
       width: MONTH_CALENDAR_ROW_WIDTH,
     };
     return (
-      <Calendar {...rest}>
+      <Calendar ref={e => this.calendarNode = ReactDOM.findDOMNode(e)} {...rest}>
         { hasHeader && <Header { ...headerProps } /> }
         <Body
           width={MONTH_CALENDAR_ROW_WIDTH}
