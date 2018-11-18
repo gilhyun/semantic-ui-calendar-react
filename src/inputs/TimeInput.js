@@ -63,7 +63,7 @@ class TimeInput extends BaseInput {
       });
   }
 
-  getPicker() {
+  getPicker({ tabIndex }) {
     const {
       value,
       timeFormat
@@ -75,6 +75,7 @@ class TimeInput extends BaseInput {
       value: currentValue,
       onChange: this.handleSelect,
       timeFormat,
+      tabIndex,
       // key: value, // seems like it works without reinstantiating picker every time value changes
     };
     if (this.state.mode === 'hour') {
@@ -94,9 +95,9 @@ class TimeInput extends BaseInput {
         onPopupUnmount={this.onPopupClose}
         icon="time"
         { ...rest }
-        value={value}>
-        { this.getPicker() }
-      </InputView>
+        value={value}
+        render={pickerProps => this.getPicker(pickerProps)}
+      />
     );
   }
 }

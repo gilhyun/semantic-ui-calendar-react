@@ -7,43 +7,46 @@ import Body from './CalendarBody/Body';
 
 const MINUTE_CALENDAR_ROW_WIDTH = '3';
 
-function MinuteView(props) {
-  const {
-    minutes,
-    hasHeader,
-    onMinuteClick,
-    onNextPageBtnClick,
-    onPrevPageBtnClick,
-    hasNextPage,
-    hasPrevPage,
-    onHeaderClick,
-    active,
-    currentDate,
-    hovered,
-    onCellHover,
-  } = props;
-  const headerProps = {
-    onHeaderClick,
-    onNextPageBtnClick,
-    onPrevPageBtnClick,
-    hasNextPage,
-    hasPrevPage,
-    title: currentDate,
-    width: MINUTE_CALENDAR_ROW_WIDTH,
-    displayWeeks: false,
-  };
-  return (
-    <Calendar>
-      { hasHeader && <Header { ...headerProps } /> }
-      <Body
-        width={MINUTE_CALENDAR_ROW_WIDTH}
-        data={minutes}
-        hovered={hovered}
-        onCellHover={onCellHover}
-        onCellClick={onMinuteClick}
-        active={active} />
-    </Calendar>
-  );
+class MinuteView extends React.Component {
+  render() {
+    const {
+      minutes,
+      hasHeader,
+      onMinuteClick,
+      onNextPageBtnClick,
+      onPrevPageBtnClick,
+      hasNextPage,
+      hasPrevPage,
+      onHeaderClick,
+      active,
+      currentDate,
+      hovered,
+      onCellHover,
+      ...rest
+    } = this.props;
+    const headerProps = {
+      onHeaderClick,
+      onNextPageBtnClick,
+      onPrevPageBtnClick,
+      hasNextPage,
+      hasPrevPage,
+      title: currentDate,
+      width: MINUTE_CALENDAR_ROW_WIDTH,
+      displayWeeks: false,
+    };
+    return (
+      <Calendar {...rest}>
+        { hasHeader && <Header { ...headerProps } /> }
+        <Body
+          width={MINUTE_CALENDAR_ROW_WIDTH}
+          data={minutes}
+          hovered={hovered}
+          onCellHover={onCellHover}
+          onCellClick={onMinuteClick}
+          active={active} />
+      </Calendar>
+    );
+  }
 }
 
 MinuteView.propTypes = {
