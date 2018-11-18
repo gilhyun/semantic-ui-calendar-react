@@ -157,6 +157,7 @@ DayPicker.propTypes = {
   onChange: PropTypes.func.isRequired,
   /** A value for initializing day picker's state. */
   initializeWith: PropTypes.instanceOf(moment).isRequired,
+  displayWeeks: PropTypes.bool,
   /** Currently selected day. */
   value: PropTypes.instanceOf(moment),
   /** Array of disabled days. */

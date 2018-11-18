@@ -88,7 +88,7 @@ class DateTimeInput extends BaseInput {
     return dateTimeFormat || `${dateFormat}${divider}${TIME_FORMAT[timeFormat]}`;
   }
 
-  getPicker() {
+  getPicker({ tabIndex }) {
     const {
       value,
       initialDate,
@@ -99,6 +99,7 @@ class DateTimeInput extends BaseInput {
     } = this.props;
     const dateTimeFormat = this.getDateTimeFormat();
     const pickerProps = {
+      tabIndex,
       displayWeeks: true,
       hasHeader: true,
       onChange: this.handleSelect,
@@ -187,9 +188,9 @@ class DateTimeInput extends BaseInput {
         icon="calendar"
         onFocus={this._onFocus}
         { ...rest }
-        value={value}>
-        { this.getPicker() }
-      </InputView>
+        value={value}
+        render={pickerProps => this.getPicker(pickerProps)}
+      />
     );
   }
 }
